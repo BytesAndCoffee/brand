@@ -16,6 +16,7 @@ The single source for the Bytes & Coffee look and voice: colour tokens, type, fo
 | `assets/logos/`, `assets/social/` | Avatars and the shipped link previews and banners |
 | `docs/components/` | When and how to use each component |
 | `examples/index.html` | Every component on one page, with a theme toggle |
+| `sizzle/` | The brand on one page: `bytes-coffee-sizzle.pdf`, its PNG preview, and the `sizzle.html` source. Rebuild with `node scripts/build_sizzle.js` (needs Playwright) |
 
 ## Using it
 
