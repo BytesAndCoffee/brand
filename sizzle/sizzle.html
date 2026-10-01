@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<script>
+  // ?theme=light renders the Latte (light) theme; default is Espresso.
+  if (new URLSearchParams(location.search).get('theme') === 'light') document.documentElement.dataset.theme = 'light';
+</script>
+<head>
+<meta charset="utf-8">
+<title>Bytes &amp; Coffee sizzle page</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  /* One 1600px-wide page; the build script sizes the PDF to the sheet. Build with: node scripts/build_sizzle.js */
+  @page { margin: 0; }
+  html, body { margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: var(--page); color: var(--ink); font-family: var(--font-sans); }
+  .sheet {
+    width: 1600px; box-sizing: border-box; padding: 64px 72px 48px;
+    background: radial-gradient(120% 110% at 0% 0%, var(--page-a) 0%, var(--page-b) 45%, var(--page-c) 100%);
+    display: grid; gap: 36px;
+  }
+
+  /* Header */
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  /* Metadata set straight on the page. Light muted is only 4.0:1 on page, so Latte uses text-body. */
+  .sheet { --meta: var(--muted); }
+  :root[data-theme="light"] .sheet { --meta: var(--text-body); --elev-media: 0 24px 48px -24px var(--shadow-modal); }
+  .top .caption { font: 400 14px/1 var(--font-mono); color: var(--meta); letter-spacing: .04em; }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1fr 360px; gap: var(--space-6); align-items: center; }
+  .hero .bc-headline { font-size: 100px; letter-spacing: -.03em; font-variation-settings: "opsz" 60, "WONK" 0, "SOFT" 0; }
+  .hero .bc-accent { font-variation-settings: "opsz" 60, "WONK" 0, "SOFT" 0; }
+  .hero .bc-lead { max-width: 58ch; font-size: 21px; }
+  .hero .bc-kicker { font-size: 14px; margin-bottom: 20px; }
+  .hero .bc-cards { width: 270px; height: 320px; justify-self: center; }
+  .hero .bc-card-title { font-size: 31px; }
+  .cup { width: 110px; height: 110px; margin: 6px 0 0 4px; }
+
+  /* Panels */
+  .grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; min-height: 0; }
+  .panel { background: var(--panel); border: 2px solid var(--border-card); border-radius: var(--radius-lg); padding: 26px 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; min-height: 0; }
+  .panel h2 { font: 800 30px/1.05 var(--font-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; font-variation-settings: "opsz" 36, "WONK" 0, "SOFT" 0; }
+  .panel h2 em { color: var(--orange); font-variation-settings: "WONK" 0, "SOFT" 0; }
+  .panel .bc-kicker { font-size: 12px; margin: 0 0 -8px; }
+
+  /* Family */
+  .fam { display: grid; gap: 14px; }
+  .fam-row { display: grid; grid-template-columns: 214px 1fr; align-items: center; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .fam-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .fam .bc-tile { width: 40px; height: 40px; font-size: 27px; border-radius: 9px; }
+  .fam .bc-wm { gap: .6rem; }
+  .fam .bc-wm-text { font-size: 13px; }
+  .fam .bc-wm-text b { font-size: 24px; }
+  .fam .avatar { width: 40px; height: 40px; border-radius: 9px; }
+  .fam .plain { font: 700 18px/1 var(--font-sans); color: var(--ink); }
+  .fam code { font: 400 17px/1 var(--font-mono); color: var(--orange-dark); }
+  .fam p { margin: 0; font-size: 14px; line-height: 1.45; color: var(--text-body); }
+  .fam p span { display: block; font: 400 12px/1.4 var(--font-mono); color: var(--muted); margin-top: 3px; }
+
+  /* Colour */
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .sw { display: grid; gap: 7px; }
+  .sw i { display: block; height: 56px; border-radius: var(--radius-md); border: 1.5px solid var(--border-card); }
+  .sw b { font: 500 12px/1 var(--font-mono); color: var(--ink); }
+  .sw span { font: 400 11px/1 var(--font-mono); color: var(--muted); }
+  .budget { display: grid; grid-template-columns: 70fr 20fr 10fr; height: 22px; border-radius: var(--radius-sm); overflow: hidden; border: 1.5px solid var(--border-card); }
+  .budget i:nth-child(1) { background: var(--page); }
+  .budget i:nth-child(2) { background: var(--ink); }
+  .budget i:nth-child(3) { background: var(--orange); }
+  .budget-key { display: flex; justify-content: space-between; font: 400 12px/1 var(--font-mono); color: var(--muted); margin-top: -8px; }
+  .rule { font-size: 14px; line-height: 1.5; color: var(--text-body); margin: 0; }
+  .rule b { color: var(--ink); }
+
+  /* Type + voice */
+  .type { display: grid; gap: 12px; }
+  .spec { display: grid; grid-template-columns: 74px 1fr; align-items: baseline; gap: 12px; }
+  .spec .aa { font-size: 52px; line-height: .9; color: var(--ink); }
+  .spec .f1 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.03em; font-variation-settings: "WONK" 0, "SOFT" 0; }
+  .spec .f2 { font-family: var(--font-sans); font-weight: 700; font-size: 44px; }
+  .spec .f3 { font-family: var(--font-mono); font-weight: 500; font-size: 40px; }
+  .spec p { margin: 0; font-size: 14px; line-height: 1.4; color: var(--text-body); }
+  .spec p b { display: block; color: var(--ink); font-size: 15px; }
+  .voice { display: grid; gap: 8px; margin-top: 2px; }
+  .voice q { font: 800 21px/1.15 var(--font-display); letter-spacing: -.015em; color: var(--ink); quotes: none; font-variation-settings: "WONK" 0, "SOFT" 0; }
+  .voice .bc-cmd { font-size: 13px; padding: 9px 12px; justify-self: start; }
+
+  /* Shipped media */
+  .shipped { display: grid; gap: 18px; }
+  .shipped .bc-kicker { font-size: 12px; margin: 0; }
+  .media { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .media figure { margin: 0; display: grid; gap: 10px; }
+  .media figcaption { font: 400 12px/1.3 var(--font-mono); color: var(--meta); }
+  .media img { width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; display: block; border-radius: var(--radius-md); border: 1.5px solid var(--border-card); box-shadow: var(--elev-media); }
+
+  /* Footer */
+  .foot { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 20px; font: 400 15px/1 var(--font-mono); color: var(--meta); }
+  .foot em { font-style: italic; }
+  .foot .url { color: var(--orange-dark); }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="top">
+    <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BYTES &amp;<b>COFFEE</b></span></span>
+    <span class="caption" id="theme-name">Brand system v1 · Espresso theme</span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="bc-kicker">Bytes &amp; Coffee · An independent studio</p>
+      <h1 class="bc-headline">Questionable ideas. <span class="bc-accent">Unreasonable</span> care.</h1>
+      <p class="bc-lead" data-latte="Things Michael Yazdani makes, writes, and stays up too late for. Warm and bookish on the outside. Precise on the inside.">Things Michael Yazdani makes, writes, and stays up too late for. Warm, dark, and bookish on the outside. Precise on the inside.</p>
+    </div>
+    <div class="bc-cards">
+      <div class="bc-card bc-card-back"></div>
+      <div class="bc-card bc-card-front">
+        <div>
+          <div class="bc-card-kicker">Currently brewing</div>
+          <svg class="cup" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M34 10c-4 5 4 9 0 15M48 8c-4 5 4 9 0 15M62 10c-4 5 4 9 0 15"/>
+            <path d="M24 36h52v18c0 14-11 24-26 24S24 68 24 54z"/>
+            <path d="M76 42h5a9 9 0 0 1 0 18h-6"/>
+            <path d="M16 88h68"/>
+          </svg>
+        </div>
+        <div class="bc-card-title">Good things. <em>Freshly</em> brewed.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+
+    <div class="panel">
+      <p class="bc-kicker">The family</p>
+      <h2>One parent. A few <em>bad</em> decisions.</h2>
+      <div class="fam">
+        <div class="fam-row">
+          <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BYTES &amp;<b>COFFEE</b></span></span>
+          <p>The studio, and the blog of notes, links, and longer thoughts.<span>bytes.coffee · blog.bytes.coffee</span></p>
+        </div>
+        <div class="fam-row">
+          <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BAD<b>DECISIONS</b></span></span>
+          <p>An absurdly overengineered party game engine.<span>bytes.coffee/bad-decisions</span></p>
+        </div>
+        <div class="fam-row">
+          <span class="plain">Peer Pressure</span>
+          <p>Bad Decisions, live in the same room. Plain type; never its own logo.</p>
+        </div>
+        <div class="fam-row">
+          <code>$ regret</code>
+          <p>The terminal client. Regret in prose, <code style="font-size:14px">regret</code> when typed.<span>brew install bytesandcoffee/tap/regret</span></p>
+        </div>
+        <div class="fam-row">
+          <span class="bc-wm"><img class="avatar" src="../assets/logos/daily-regrets-avatar.png" alt=""><span class="bc-wm-text">DAILY<b>REGRETS</b></span></span>
+          <p>A Bluesky bot. One card every morning.<span>@regret.bytes.coffee</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <p class="bc-kicker">Colour</p>
+      <h2 data-latte-html="Latte, ink, and &lt;em&gt;burnt orange.&lt;/em&gt;">Espresso, cream, and <em>burnt orange.</em></h2>
+      <div class="swatches">
+        <div class="sw" data-token="page"><i style="background:var(--page)"></i><b>page</b><span></span></div>
+        <div class="sw" data-token="panel"><i style="background:var(--panel)"></i><b>panel</b><span></span></div>
+        <div class="sw" data-token="ink"><i style="background:var(--ink)"></i><b>ink</b><span></span></div>
+        <div class="sw" data-token="text-body"><i style="background:var(--text-body)"></i><b>text-body</b><span></span></div>
+        <div class="sw" data-token="orange"><i style="background:var(--orange)"></i><b>orange</b><span></span></div>
+        <div class="sw" data-token="orange-fill"><i style="background:var(--orange-fill)"></i><b>orange-fill</b><span></span></div>
+        <div class="sw" data-token="orange-dark"><i style="background:var(--orange-dark)"></i><b>orange-dark</b><span></span></div>
+        <div class="sw" data-token="accent-deep"><i style="background:var(--accent-deep)"></i><b>accent-deep</b><span></span></div>
+      </div>
+      <div class="budget"><i></i><i></i><i></i></div>
+      <div class="budget-key"><span>70% ground</span><span>20% ink + cream</span><span>10% orange</span></div>
+      <p class="rule"><b>Orange is for fills and big type.</b> Small orange text uses orange-dark. Never more than one orange hero on screen. Every text pair clears 4.5:1.</p>
+    </div>
+
+    <div class="panel">
+      <p class="bc-kicker">Type &amp; voice</p>
+      <h2>Three families. <em>One</em> job each.</h2>
+      <div class="type">
+        <div class="spec"><span class="aa f1">Aa</span><p><b>Fraunces</b>Headlines, cards, titles. ExtraBold, tight.</p></div>
+        <div class="spec"><span class="aa f2">Aa</span><p><b>Manrope</b>Everything people read at length.</p></div>
+        <div class="spec"><span class="aa f3">Aa</span><p><b>DM Mono</b>The machine's voice: kickers, commands.</p></div>
+      </div>
+      <div class="voice">
+        <q>Make a terrible decision.</q>
+        <q>Same room. Full screen.</q>
+        <span class="bc-cmd"><span class="p">$</span>Peer Pressure faltered: Regret alone</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="shipped">
+  <p class="bc-kicker">Already shipped</p>
+  <div class="media">
+    <figure><img src="../assets/social/bytes-coffee-og.png" alt="Bytes &amp; Coffee link preview"><figcaption>bytes.coffee · link preview, 1200×630</figcaption></figure>
+    <figure><img src="../assets/social/bad-decisions-github-preview.png" alt="Bad Decisions GitHub social preview"><figcaption>Bad Decisions · GitHub preview, 1280×640</figcaption></figure>
+    <figure><img src="../assets/social/blog-og.png" alt="Blog link preview"><figcaption>blog.bytes.coffee · link preview, 1200×630</figcaption></figure>
+  </div>
+  </section>
+
+  <footer class="foot">
+    <span>A little code. A <em>lot</em> of coffee.</span>
+    <span>github.com/BytesAndCoffee/brand</span>
+    <span class="url">bytes.coffee</span>
+  </footer>
+
+</div>
+<script>
+  // Theme name and swatch hex labels come from the live tokens, so both editions stay correct.
+  if (document.documentElement.dataset.theme === 'light')
+  {
+    document.getElementById('theme-name').textContent = 'Brand system v1 · Latte theme';
+    for (const el of document.querySelectorAll('[data-latte]')) el.textContent = el.dataset.latte;
+    for (const el of document.querySelectorAll('[data-latte-html]')) el.innerHTML = el.dataset.latteHtml;
+  }
+  const css = getComputedStyle(document.documentElement);
+  for (const sw of document.querySelectorAll('.sw[data-token]'))
+    sw.querySelector('span').textContent = css.getPropertyValue('--' + sw.dataset.token).trim().toUpperCase();
+</script>
+</body>
+</html>
