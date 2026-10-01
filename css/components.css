@@ -1,0 +1,47 @@
+/* Bytes & Coffee components. Load after tokens.css and fonts.css. */
+.bc-root { background: var(--page); color: var(--ink); font-family: var(--font-sans); padding: 20px; box-sizing: border-box; }
+.bc-row { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.bc-stack { display: grid; gap: var(--space-4); }
+
+/* Wordmark */
+.bc-wm { display: inline-flex; align-items: center; gap: 0.8rem; font-family: var(--font-sans); font-weight: 700; }
+.bc-tile { width: 56px; height: 56px; border-radius: var(--radius-tile); background: var(--ink); color: var(--on-ink); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 38px; line-height: 1; }
+.bc-wm-text { line-height: 1; font-size: 17px; letter-spacing: .02em; color: var(--ink); }
+.bc-wm-text b { display: block; color: var(--orange); font-size: 26px; font-weight: 700; margin-top: 2px; letter-spacing: 0; }
+
+/* Button */
+.bc-btn { font: 700 0.95rem/1.2 var(--font-sans); display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1.1rem; border-radius: var(--radius-sm); border: 2px solid var(--border); background: transparent; color: var(--ink); box-shadow: var(--elev-button); cursor: pointer; text-decoration: none; }
+.bc-btn-primary { background: var(--orange-fill); border-color: var(--orange-fill); color: var(--on-accent); }
+.bc-btn:hover { border-color: var(--border-strong); }
+.bc-btn-primary:hover { border-color: var(--accent-deep); }
+.bc-btn:active { box-shadow: none; transform: translate(.2rem, .25rem); }
+.bc-btn:focus-visible, .bc-link:focus-visible { outline: 2px solid var(--orange-dark); outline-offset: 2px; }
+.bc-link { color: var(--orange-dark); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Code chip */
+.bc-chip { font-family: var(--font-mono); font-weight: 500; font-size: .72em; letter-spacing: 0; background: var(--cream); color: var(--orange-dark); border: 2px solid var(--border-card); border-radius: var(--radius-chip); padding: 0 .22em; box-shadow: var(--elev-chip); display: inline-block; line-height: 1.1; vertical-align: .06em; }
+
+/* Headline */
+.bc-kicker { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--orange-dark); margin: 0 0 var(--space-1); }
+.bc-headline { font-family: var(--font-display); font-weight: 800; letter-spacing: -.035em; line-height: .95; margin: 0; color: var(--ink); text-wrap: balance; }
+.bc-accent { font-style: italic; color: var(--orange); letter-spacing: -.02em; }
+.bc-lead { font-family: var(--font-sans); font-size: 1.2rem; line-height: 1.5; color: var(--text-body); margin: var(--space-3) 0 0; max-width: 34ch; }
+
+/* Card stack */
+.bc-cards { position: relative; width: 250px; height: 300px; }
+.bc-card { position: absolute; inset: 0; border-radius: var(--radius-lg); padding: 22px; box-sizing: border-box; }
+.bc-card-back { background: var(--panel); border: 2px solid var(--border-card); transform: rotate(-8deg) translate(-14px, 10px); }
+.bc-card-front { background: var(--orange-fill); color: var(--on-accent); transform: rotate(5deg); box-shadow: var(--elev-card); display: flex; flex-direction: column; justify-content: space-between; }
+.bc-card-kicker { font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+.bc-card-title { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.02; letter-spacing: -.02em; }
+.bc-card-title em { font-style: italic; text-decoration: underline; text-decoration-color: var(--accent-deep); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+/* Command line */
+.bc-cmd { font-family: var(--font-mono); font-weight: 400; font-size: 15px; background: var(--panel-sunk); border: 1.5px solid var(--line); border-radius: var(--radius-md); padding: 12px 16px; color: var(--ink); display: inline-block; }
+.bc-cmd .p { color: var(--orange-dark); margin-right: .6em; }
+.bc-tag { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: .04em; color: var(--ink); background: var(--cream); border: 1.5px solid var(--border-card); border-radius: 30px; padding: 6px 12px; }
+
+/* Fraunces italic ships "wonky" alternates by default; the brand uses the calm italic. */
+.bc-accent, .bc-card-title em, .display-accent, [data-bc-italic] { font-variation-settings: "WONK" 0, "SOFT" 0; }
+.bc-headline, .bc-card-title { font-variation-settings: "WONK" 0, "SOFT" 0; }
+.bc-stack > .bc-cmd { justify-self: start; }

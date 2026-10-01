@@ -1,0 +1,8 @@
+/* Bytes & Coffee fonts, self-hosted (SIL OFL 1.1, see fonts/<family>/OFL.txt).
+   Or load the same families from Google Fonts:
+   https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,600..800;1,9..144,800&family=Manrope:wght@400..800&display=swap */
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces/Fraunces-VF.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces/Fraunces-Italic-VF.ttf") format("truetype"); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("../fonts/manrope/Manrope-VF.ttf") format("truetype"); font-weight: 200 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("../fonts/dm-mono/DMMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "DM Mono"; src: url("../fonts/dm-mono/DMMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }

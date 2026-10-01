@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bytes &amp; Coffee components</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../css/components.css">
+<style>
+  body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--font-sans); }
+  main { max-width: 960px; margin: 0 auto; padding: 48px 20px; display: grid; gap: var(--space-5); }
+  section { display: grid; gap: var(--space-3); }
+  h2 { margin: 0; }
+  .theme { position: fixed; top: 16px; right: 16px; }
+</style>
+</head>
+<body>
+<button class="bc-btn theme" type="button" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'">Toggle theme</button>
+<main>
+  <section><p class="kicker" style="color:var(--orange-dark)">Wordmark</p>
+    <div class="bc-row" style="gap:2.5rem">
+      <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BYTES &amp;<b>COFFEE</b></span></span>
+      <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BAD<b>DECISIONS</b></span></span>
+      <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">DAILY<b>REGRETS</b></span></span>
+    </div></section>
+  <section><p class="bc-kicker">An absurdly overengineered party game engine</p>
+    <h1 class="bc-headline" style="font-size:clamp(3.5rem,10vw,5rem)">Make a <span class="bc-accent">terrible</span> decision.</h1>
+    <p class="bc-lead">Deal a round, or join a room with your friends.</p>
+    <div class="bc-row"><a class="bc-btn bc-btn-primary" href="https://blog.bytes.coffee/">Read the blog <span aria-hidden="true">↗</span></a><a class="bc-btn" href="https://bytes.coffee/bad-decisions/">Play Bad Decisions <span aria-hidden="true">↗</span></a></div></section>
+  <section><h2 class="bc-headline" style="font-size:3.5rem">Something <span class="bc-chip">new()</span> is brewing…</h2></section>
+  <section><div class="bc-row" style="gap:4rem;padding:24px">
+    <div class="bc-cards"><div class="bc-card bc-card-back"></div><div class="bc-card bc-card-front"><div class="bc-card-kicker">Currently brewing</div><div class="bc-card-title">Good things. Freshly brewed.</div></div></div>
+    <div class="bc-cards"><div class="bc-card bc-card-back"></div><div class="bc-card bc-card-front"><div class="bc-card-kicker">Today’s consequence</div><div class="bc-card-title">War! What is it good for? <em>Cuddling.</em></div></div></div>
+  </div></section>
+  <section class="bc-stack"><span class="bc-cmd"><span class="p">$</span>brew install bytesandcoffee/tap/regret</span>
+    <div class="bc-row"><span class="bc-tag">REST API</span><span class="bc-tag">Peer Pressure</span><span class="bc-tag">Regret CLI + TUI</span></div></section>
+</main>
+</body>
+</html>
