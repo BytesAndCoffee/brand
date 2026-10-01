@@ -8,7 +8,7 @@ The single source for the Bytes & Coffee look and voice: colour tokens, type, fo
 
 | Path | What |
 |---|---|
-| `tokens/tokens.json` | The source of truth: every colour (Espresso and Paper themes), type style, space, radius and shadow, each with a usage note |
+| `tokens/tokens.json` | The source of truth: every colour (Espresso and Latte themes), type style, space, radius and shadow, each with a usage note |
 | `tokens/tokens.css` | Generated CSS custom properties and type-style classes. Run `python3 scripts/build_tokens.py` after editing the JSON |
 | `css/fonts.css` | `@font-face` rules for the self-hosted fonts |
 | `css/components.css` | Wordmark, buttons, code chip, headline, card stack, command line (`bc-*` classes) |
@@ -16,7 +16,7 @@ The single source for the Bytes & Coffee look and voice: colour tokens, type, fo
 | `assets/logos/`, `assets/social/` | Avatars and the shipped link previews and banners |
 | `docs/components/` | When and how to use each component |
 | `examples/index.html` | Every component on one page, with a theme toggle |
-| `sizzle/` | The brand on one page, in two editions: `bytes-coffee-sizzle.pdf` (Espresso) and `bytes-coffee-sizzle-latte.pdf` (Latte, on the light Paper tokens), each with a PNG preview. Source is `sizzle.html` (`?theme=light` for Latte). Rebuild both with `node scripts/build_sizzle.js` (needs Playwright) |
+| `sizzle/` | The brand on one page, in two editions: `bytes-coffee-sizzle.pdf` (Espresso) and `bytes-coffee-sizzle-latte.pdf` (Latte), each with a PNG preview. Source is `sizzle.html` (`?theme=light` for Latte). Rebuild both with `node scripts/build_sizzle.js` (needs Playwright) |
 
 ## Using it
 

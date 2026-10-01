@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
 <script>
-  // ?theme=light renders the Latte edition on the Paper (light) tokens; default is Espresso.
+  // ?theme=light renders the Latte (light) theme; default is Espresso.
   if (new URLSearchParams(location.search).get('theme') === 'light') document.documentElement.dataset.theme = 'light';
 </script>
 <head>
@@ -162,7 +162,7 @@
 
     <div class="panel">
       <p class="bc-kicker">Colour</p>
-      <h2 data-latte-html="Paper, ink, and &lt;em&gt;burnt orange.&lt;/em&gt;">Espresso, cream, and <em>burnt orange.</em></h2>
+      <h2 data-latte-html="Latte, ink, and &lt;em&gt;burnt orange.&lt;/em&gt;">Espresso, cream, and <em>burnt orange.</em></h2>
       <div class="swatches">
         <div class="sw" data-token="page"><i style="background:var(--page)"></i><b>page</b><span></span></div>
         <div class="sw" data-token="panel"><i style="background:var(--panel)"></i><b>panel</b><span></span></div>
@@ -215,7 +215,7 @@
   // Theme name and swatch hex labels come from the live tokens, so both editions stay correct.
   if (document.documentElement.dataset.theme === 'light')
   {
-    document.getElementById('theme-name').textContent = 'Brand system v1 · Latte edition, Paper theme';
+    document.getElementById('theme-name').textContent = 'Brand system v1 · Latte theme';
     for (const el of document.querySelectorAll('[data-latte]')) el.textContent = el.dataset.latte;
     for (const el of document.querySelectorAll('[data-latte-html]')) el.innerHTML = el.dataset.latteHtml;
   }

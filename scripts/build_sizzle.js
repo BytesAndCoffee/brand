@@ -1,6 +1,6 @@
 // Renders sizzle/sizzle.html to one-page PDFs (and PNG previews) in both themes:
 //   sizzle/bytes-coffee-sizzle.pdf        Espresso (dark)
-//   sizzle/bytes-coffee-sizzle-latte.pdf  Latte edition, on the Paper (light) tokens
+//   sizzle/bytes-coffee-sizzle-latte.pdf  Latte (light)
 // Usage: node scripts/build_sizzle.js   (needs the playwright package and Chromium)
 const path = require('path');
 const { pathToFileURL } = require('url');

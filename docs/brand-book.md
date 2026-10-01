@@ -32,7 +32,7 @@ Don't: exclamation marks in product copy; "revolutionary", "seamless", "supercha
 
 ## Colour
 
-The brand is **espresso, cream, and burnt orange**. Dark (`Espresso`) is the primary theme and every piece of collateral uses it; the website also ships a light `Paper` theme with the same tokens.
+The brand is **espresso, cream, and burnt orange**. Dark (`Espresso`) is the primary theme and every piece of collateral uses it; the website also ships a light `Latte` theme with the same tokens.
 
 - Grounds: `page` for the page, with a radial glow from `page-a` (top-left) through `page-b` to `page-c`. Raised things sit on `panel`; inset wells on `panel-sunk`.
 - Text: headlines in `ink`, running text in `text-body`, metadata in `muted`.
