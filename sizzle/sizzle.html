@@ -1,5 +1,9 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
+<script>
+  // ?theme=light renders the Latte edition on the Paper (light) tokens; default is Espresso.
+  if (new URLSearchParams(location.search).get('theme') === 'light') document.documentElement.dataset.theme = 'light';
+</script>
 <head>
 <meta charset="utf-8">
 <title>Bytes &amp; Coffee sizzle page</title>
@@ -19,7 +23,10 @@
 
   /* Header */
   .top { display: flex; justify-content: space-between; align-items: center; }
-  .top .caption { font: 400 14px/1 var(--font-mono); color: var(--muted); letter-spacing: .04em; }
+  /* Metadata set straight on the page. Light muted is only 4.0:1 on page, so Latte uses text-body. */
+  .sheet { --meta: var(--muted); }
+  :root[data-theme="light"] .sheet { --meta: var(--text-body); --elev-media: 0 24px 48px -24px var(--shadow-modal); }
+  .top .caption { font: 400 14px/1 var(--font-mono); color: var(--meta); letter-spacing: .04em; }
 
   /* Hero */
   .hero { display: grid; grid-template-columns: 1fr 360px; gap: var(--space-6); align-items: center; }
@@ -32,7 +39,7 @@
   .cup { width: 110px; height: 110px; margin: 6px 0 0 4px; }
 
   /* Panels */
-  .grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 28px; min-height: 0; }
+  .grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; min-height: 0; }
   .panel { background: var(--panel); border: 2px solid var(--border-card); border-radius: var(--radius-lg); padding: 26px 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; min-height: 0; }
   .panel h2 { font: 800 30px/1.05 var(--font-display); letter-spacing: -.02em; margin: 0; text-wrap: balance; font-variation-settings: "opsz" 36, "WONK" 0, "SOFT" 0; }
   .panel h2 em { color: var(--orange); font-variation-settings: "WONK" 0, "SOFT" 0; }
@@ -40,12 +47,12 @@
 
   /* Family */
   .fam { display: grid; gap: 14px; }
-  .fam-row { display: grid; grid-template-columns: 196px 1fr; align-items: center; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .fam-row { display: grid; grid-template-columns: 214px 1fr; align-items: center; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
   .fam-row:last-child { border-bottom: 0; padding-bottom: 0; }
   .fam .bc-tile { width: 40px; height: 40px; font-size: 27px; border-radius: 9px; }
   .fam .bc-wm { gap: .6rem; }
-  .fam .bc-wm-text { font-size: 12px; }
-  .fam .bc-wm-text b { font-size: 18px; }
+  .fam .bc-wm-text { font-size: 13px; }
+  .fam .bc-wm-text b { font-size: 24px; }
   .fam .avatar { width: 40px; height: 40px; border-radius: 9px; }
   .fam .plain { font: 700 18px/1 var(--font-sans); color: var(--ink); }
   .fam code { font: 400 17px/1 var(--font-mono); color: var(--orange-dark); }
@@ -84,11 +91,11 @@
   .shipped .bc-kicker { font-size: 12px; margin: 0; }
   .media { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .media figure { margin: 0; display: grid; gap: 10px; }
-  .media figcaption { font: 400 12px/1.3 var(--font-mono); color: var(--muted); }
+  .media figcaption { font: 400 12px/1.3 var(--font-mono); color: var(--meta); }
   .media img { width: 100%; aspect-ratio: 1200 / 630; object-fit: cover; display: block; border-radius: var(--radius-md); border: 1.5px solid var(--border-card); box-shadow: var(--elev-media); }
 
   /* Footer */
-  .foot { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 20px; font: 400 15px/1 var(--font-mono); color: var(--muted); }
+  .foot { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 20px; font: 400 15px/1 var(--font-mono); color: var(--meta); }
   .foot em { font-style: italic; }
   .foot .url { color: var(--orange-dark); }
 </style>
@@ -98,14 +105,14 @@
 
   <header class="top">
     <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BYTES &amp;<b>COFFEE</b></span></span>
-    <span class="caption">Brand system v1 · Espresso theme</span>
+    <span class="caption" id="theme-name">Brand system v1 · Espresso theme</span>
   </header>
 
   <section class="hero">
     <div>
       <p class="bc-kicker">Bytes &amp; Coffee · An independent studio</p>
       <h1 class="bc-headline">Questionable ideas. <span class="bc-accent">Unreasonable</span> care.</h1>
-      <p class="bc-lead">Things Michael Yazdani makes, writes, and stays up too late for. Warm, dark, and bookish on the outside. Precise on the inside.</p>
+      <p class="bc-lead" data-latte="Things Michael Yazdani makes, writes, and stays up too late for. Warm and bookish on the outside. Precise on the inside.">Things Michael Yazdani makes, writes, and stays up too late for. Warm, dark, and bookish on the outside. Precise on the inside.</p>
     </div>
     <div class="bc-cards">
       <div class="bc-card bc-card-back"></div>
@@ -155,16 +162,16 @@
 
     <div class="panel">
       <p class="bc-kicker">Colour</p>
-      <h2>Espresso, cream, and <em>burnt orange.</em></h2>
+      <h2 data-latte-html="Paper, ink, and &lt;em&gt;burnt orange.&lt;/em&gt;">Espresso, cream, and <em>burnt orange.</em></h2>
       <div class="swatches">
-        <div class="sw"><i style="background:var(--page)"></i><b>page</b><span>#15120F</span></div>
-        <div class="sw"><i style="background:var(--panel)"></i><b>panel</b><span>#231D18</span></div>
-        <div class="sw"><i style="background:var(--ink)"></i><b>ink</b><span>#F1E8DA</span></div>
-        <div class="sw"><i style="background:var(--text-body)"></i><b>text-body</b><span>#CDC2B1</span></div>
-        <div class="sw"><i style="background:var(--orange)"></i><b>orange</b><span>#C2601F</span></div>
-        <div class="sw"><i style="background:var(--orange-fill)"></i><b>orange-fill</b><span>#B3551A</span></div>
-        <div class="sw"><i style="background:var(--orange-dark)"></i><b>orange-dark</b><span>#E8A47D</span></div>
-        <div class="sw"><i style="background:var(--accent-deep)"></i><b>accent-deep</b><span>#9A4418</span></div>
+        <div class="sw" data-token="page"><i style="background:var(--page)"></i><b>page</b><span></span></div>
+        <div class="sw" data-token="panel"><i style="background:var(--panel)"></i><b>panel</b><span></span></div>
+        <div class="sw" data-token="ink"><i style="background:var(--ink)"></i><b>ink</b><span></span></div>
+        <div class="sw" data-token="text-body"><i style="background:var(--text-body)"></i><b>text-body</b><span></span></div>
+        <div class="sw" data-token="orange"><i style="background:var(--orange)"></i><b>orange</b><span></span></div>
+        <div class="sw" data-token="orange-fill"><i style="background:var(--orange-fill)"></i><b>orange-fill</b><span></span></div>
+        <div class="sw" data-token="orange-dark"><i style="background:var(--orange-dark)"></i><b>orange-dark</b><span></span></div>
+        <div class="sw" data-token="accent-deep"><i style="background:var(--accent-deep)"></i><b>accent-deep</b><span></span></div>
       </div>
       <div class="budget"><i></i><i></i><i></i></div>
       <div class="budget-key"><span>70% ground</span><span>20% ink + cream</span><span>10% orange</span></div>
@@ -204,5 +211,17 @@
   </footer>
 
 </div>
+<script>
+  // Theme name and swatch hex labels come from the live tokens, so both editions stay correct.
+  if (document.documentElement.dataset.theme === 'light')
+  {
+    document.getElementById('theme-name').textContent = 'Brand system v1 · Latte edition, Paper theme';
+    for (const el of document.querySelectorAll('[data-latte]')) el.textContent = el.dataset.latte;
+    for (const el of document.querySelectorAll('[data-latte-html]')) el.innerHTML = el.dataset.latteHtml;
+  }
+  const css = getComputedStyle(document.documentElement);
+  for (const sw of document.querySelectorAll('.sw[data-token]'))
+    sw.querySelector('span').textContent = css.getPropertyValue('--' + sw.dataset.token).trim().toUpperCase();
+</script>
 </body>
 </html>
