@@ -27,6 +27,8 @@
   .sheet { --meta: var(--muted); }
   :root[data-theme="light"] .sheet { --meta: var(--text-body); --elev-media: 0 24px 48px -24px var(--shadow-modal); }
   .top .caption { font: 400 14px/1 var(--font-mono); color: var(--meta); letter-spacing: .04em; }
+  .top .caption b { font-weight: 500; color: var(--meta); }
+  :root:not([data-theme="light"]) .top .th-dark, :root[data-theme="light"] .top .th-light { color: var(--ink); }
 
   /* Hero */
   .hero { display: grid; grid-template-columns: 1fr 360px; gap: var(--space-6); align-items: center; }
@@ -70,7 +72,7 @@
   .budget i:nth-child(2) { background: var(--ink); }
   .budget i:nth-child(3) { background: var(--orange); }
   .budget-key { display: flex; justify-content: space-between; font: 400 12px/1 var(--font-mono); color: var(--muted); margin-top: -8px; }
-  .rule { font-size: 14px; line-height: 1.5; color: var(--text-body); margin: 0; }
+  .rule { text-wrap: pretty; font-size: 14px; line-height: 1.5; color: var(--text-body); margin: 0; }
   .rule b { color: var(--ink); }
 
   /* Type + voice */
@@ -105,7 +107,7 @@
 
   <header class="top">
     <span class="bc-wm"><span class="bc-tile">B</span><span class="bc-wm-text">BYTES &amp;<b>COFFEE</b></span></span>
-    <span class="caption" id="theme-name">Brand system v1 · Espresso theme</span>
+    <span class="caption">Brand system v1 · Served as <b class="th-dark">Espresso</b> or <b class="th-light">Latte</b></span>
   </header>
 
   <section class="hero">
@@ -118,7 +120,7 @@
       <div class="bc-card bc-card-back"></div>
       <div class="bc-card bc-card-front">
         <div>
-          <div class="bc-card-kicker">Currently brewing</div>
+          <div class="bc-card-kicker" data-latte="Now steaming">Currently brewing</div>
           <svg class="cup" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M34 10c-4 5 4 9 0 15M48 8c-4 5 4 9 0 15M62 10c-4 5 4 9 0 15"/>
             <path d="M24 36h52v18c0 14-11 24-26 24S24 68 24 54z"/>
@@ -126,7 +128,7 @@
             <path d="M16 88h68"/>
           </svg>
         </div>
-        <div class="bc-card-title">Good things. <em>Freshly</em> brewed.</div>
+        <div class="bc-card-title" data-latte-html="Same beans. &lt;em&gt;More&lt;/em&gt; milk.">Good things. <em>Freshly</em> brewed.</div>
       </div>
     </div>
   </section>
@@ -175,7 +177,7 @@
       </div>
       <div class="budget"><i></i><i></i><i></i></div>
       <div class="budget-key"><span>70% ground</span><span>20% ink + cream</span><span>10% orange</span></div>
-      <p class="rule"><b>Orange is for fills and big type.</b> Small orange text uses orange-dark. Never more than one orange hero on screen. Every text pair clears 4.5:1.</p>
+      <p class="rule"><b>Orange is for fills and big type.</b> Small orange text uses orange-dark. Never more than one orange hero on screen. Every text pair clears 4.5:1 in both.</p>
     </div>
 
     <div class="panel">
@@ -205,17 +207,15 @@
   </section>
 
   <footer class="foot">
-    <span>A little code. A <em>lot</em> of coffee.</span>
+    <span data-latte-html="A little code. A &lt;em&gt;lot&lt;/em&gt; of coffee. Some of it with milk.">A little code. A <em>lot</em> of coffee.</span>
     <span>github.com/BytesAndCoffee/brand</span>
     <span class="url">bytes.coffee</span>
   </footer>
 
 </div>
 <script>
-  // Theme name and swatch hex labels come from the live tokens, so both editions stay correct.
-  if (document.documentElement.dataset.theme === 'light')
-  {
-    document.getElementById('theme-name').textContent = 'Brand system v1 · Latte theme';
+  // Latte copy, and swatch hex labels from the live tokens, so both editions stay correct.
+  if (document.documentElement.dataset.theme === 'light') {
     for (const el of document.querySelectorAll('[data-latte]')) el.textContent = el.dataset.latte;
     for (const el of document.querySelectorAll('[data-latte-html]')) el.innerHTML = el.dataset.latteHtml;
   }
